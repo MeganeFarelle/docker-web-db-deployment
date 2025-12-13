@@ -1,0 +1,47 @@
+services:
+  web:
+    build: ./web
+    image: r5082-web:1.0
+    container_name: r5082_web
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+    volumes:
+      - ./web/src:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    build: ./db
+    image: r5082-db:1.0
+    container_name: r5082_db
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2
+    container_name: r5082_phpmyadmin
+    ports:
+      - "8082:80"
+    env_file:
+      - .env
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
