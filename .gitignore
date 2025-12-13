@@ -1,0 +1,15 @@
+# env secrets
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+
+# node
+node_modules/
+
+# IDE
+.vscode/
