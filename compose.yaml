@@ -1,7 +1,6 @@
 services:
   web:
-    build: ./web
-    image: r5082-web:1.0
+    image: meganefarelle/r5082-web:1.0
     container_name: r5082_web
     ports:
       - "8080:80"
@@ -15,8 +14,7 @@ services:
       - app-network
 
   db:
-    build: ./db
-    image: r5082-db:1.0
+    image: meganefarelle/r5082-db:1.0
     container_name: r5082_db
     restart: unless-stopped
     env_file:
